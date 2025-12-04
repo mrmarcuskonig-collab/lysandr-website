@@ -1,0 +1,11 @@
+Vite template structure needed:
+
+index.html
+src/
+  main.tsx
+  App.tsx
+  components/...
+  services/...
+tsconfig.json
+package.json
+vite.config.ts
