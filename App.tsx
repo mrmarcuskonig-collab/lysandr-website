@@ -90,9 +90,7 @@ const App: React.FC = () => {
           <UseCases />
           
           <DevVsNoCode />
-          
-          <InteractiveSimulator />
-          
+                    
           {/* CTA Section */}
           <section id="access" className="py-24 relative overflow-hidden bg-zinc-900/30">
             <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
