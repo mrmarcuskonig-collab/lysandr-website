@@ -3,7 +3,6 @@ import { Navigation } from './components/Navigation';
 import { Features } from './components/Features';
 import { UseCases } from './components/UseCases';
 import { DevVsNoCode } from './components/DevVsNoCode';
-import { InteractiveSimulator } from './components/InteractiveSimulator';
 import { Footer } from './components/Footer';
 import { Button } from './components/Button';
 import { Impressum } from './components/Impressum';
