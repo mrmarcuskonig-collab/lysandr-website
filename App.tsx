@@ -8,6 +8,12 @@ import { Button } from './components/Button';
 import { Impressum } from './components/Impressum';
 import { ArrowRight, CheckCircle2, X } from 'lucide-react';
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'impressum'>('home');
@@ -24,13 +30,20 @@ const App: React.FC = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+
+    // === TRACK GOOGLE ADS CONVERSION ===
+    if (window.gtag) {
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-17782645036/G0gACPHf0swbEKzCtp9C'
+      });
+    }
+
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    // Restore body scroll
     document.body.style.overflow = 'unset';
   };
 
@@ -65,7 +78,8 @@ const App: React.FC = () => {
               </h1>
               
               <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-                Give your AI agents a safe way to spend — across money, tokens, and compute. Approve each transaction or fully automate it, with full governance and control.
+                Give your AI agents a safe way to spend — across money, tokens, and compute. 
+                Approve each transaction or fully automate it, with full governance and control.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
@@ -86,65 +100,9 @@ const App: React.FC = () => {
           </section>
 
           <Features />
-          
           <UseCases />
-          
           <DevVsNoCode />
                     
           {/* CTA Section */}
           <section id="access" className="py-24 relative overflow-hidden bg-zinc-900/30">
-            <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-              <h2 className="text-4xl font-semibold mb-6 text-white tracking-tight">Ready to build the autonomous economy?</h2>
-              <p className="text-zinc-400 text-lg mb-10 font-light">
-                We're working with agent developers, AI-first startups, and enterprise automation teams. 
-                Secure your spot on the waitlist today.
-              </p>
-              
-              <Button variant="primary" size="lg" onClick={openModal}>
-                Request Access
-              </Button>
-            </div>
-          </section>
-        </main>
-      ) : (
-        <Impressum />
-      )}
-      
-      <Footer onNavigate={handleNavigate} />
-
-      {/* Modal Overlay */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-          <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
-            onClick={closeModal}
-          />
-          <div className="relative w-full max-w-2xl bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="flex justify-between items-center p-4 border-b border-zinc-800 bg-zinc-900/50">
-              <h3 className="text-lg font-medium text-white pl-2">Request Access</h3>
-              <button 
-                onClick={closeModal}
-                className="text-zinc-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            <div className="bg-zinc-950 relative">
-               <iframe 
-                className="airtable-embed" 
-                src="https://airtable.com/embed/appfI6ksS9PIPM7rg/pagIjfzzQiP4YWTwC/form" 
-                frameBorder="0" 
-                width="100%" 
-                height="533" 
-                style={{ background: 'transparent' }}
-                title="Request Access Form"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default App;
+            <div className="max-w-4xl mx-auto px-4 text-center rel
