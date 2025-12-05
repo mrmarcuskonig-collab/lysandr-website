@@ -6,7 +6,7 @@ import { DevVsNoCode } from './components/DevVsNoCode';
 import { Footer } from './components/Footer';
 import { Button } from './components/Button';
 import { Impressum } from './components/Impressum';
-import { ArrowRight, CheckCircle2, X } from 'lucide-react';
+import { CheckCircle2, X } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -31,14 +31,13 @@ const App: React.FC = () => {
   const openModal = () => {
     setIsModalOpen(true);
 
-    // === TRACK GOOGLE ADS CONVERSION ===
+    // Track conversion
     if (window.gtag) {
       window.gtag('event', 'conversion', {
         send_to: 'AW-17782645036/G0gACPHf0swbEKzCtp9C'
       });
     }
 
-    // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
   };
 
@@ -58,9 +57,10 @@ const App: React.FC = () => {
         onRequestAccess={openModal} 
         onHomeClick={() => setCurrentView('home')} 
       />
-      
+
       {currentView === 'home' ? (
         <main>
+
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden border-b border-white/5">
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -71,30 +71,47 @@ const App: React.FC = () => {
                 </span>
                 Now accepting early access requests
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl font-semibold tracking-tighter mb-8 text-white">
                 The Financial Layer for <br />
                 <span className="text-zinc-400">AI Agents</span>
               </h1>
-              
+
               <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
                 Give your AI agents a safe way to spend — across money, tokens, and compute. 
                 Approve each transaction or fully automate it, with full governance and control.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto group" onClick={openModal}>
-                  Request Early Access 
+                <Button 
+                  variant="primary" 
+                  size="lg" 
+                  className="w-full sm:w-auto group" 
+                  onClick={openModal}
+                >
+                  Request Early Access
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto" onClick={() => document.getElementById('features')?.scrollIntoView()}>
+
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto" 
+                  onClick={() => document.getElementById('features')?.scrollIntoView()}
+                >
                   Explore Features
                 </Button>
               </div>
 
               <div className="flex items-center justify-center gap-8 text-zinc-500 text-sm font-medium">
-                <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-white"/> KY-A (Agent Identity)</span>
-                <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-white"/> Spend Controls</span>
-                <span className="flex items-center gap-2"><CheckCircle2 size={16} className="text-white"/> Unified Rails</span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-white"/> KY-A (Agent Identity)
+                </span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-white"/> Spend Controls
+                </span>
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={16} className="text-white"/> Unified Rails
+                </span>
               </div>
             </div>
           </section>
@@ -102,7 +119,38 @@ const App: React.FC = () => {
           <Features />
           <UseCases />
           <DevVsNoCode />
-                    
+
           {/* CTA Section */}
           <section id="access" className="py-24 relative overflow-hidden bg-zinc-900/30">
-            <div className="max-w-4xl mx-auto px-4 text-center rel
+            <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+              <h2 className="text-4xl font-semibold mb-6 text-white tracking-tight">
+                Ready to build the autonomous economy?
+              </h2>
+
+              <p className="text-zinc-400 text-lg mb-10 font-light">
+                We're working with agent developers, AI-first startups, and enterprise automation teams. 
+                Secure your spot on the waitlist today.
+              </p>
+
+              <Button variant="primary" size="lg" onClick={openModal}>
+                Request Access
+              </Button>
+            </div>
+          </section>
+
+        </main>
+      ) : (
+        <Impressum />
+      )}
+
+      <Footer onNavigate={handleNavigate} />
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
+            onClick={closeModal}
+          />
+
+          <div className="relative w-full max-w-2xl bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl o
