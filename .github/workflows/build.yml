@@ -4,13 +4,19 @@ on:
   push:
     branches: [ "main" ]
 
+    permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - - name: Checkout repo
+  uses: actions/checkout@v3
+  with:
+    token: ${{ secrets.GITHUB_TOKEN }}
+    fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -27,6 +33,13 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add docs -A
-          git commit -m "Build Vite site" || echo "No changes"
-          git push
+          - name: Push build to docs folder
+  run: |
+    git add docs -A
+    if git diff-index --quiet HEAD --; then
+      echo "No changes"
+    else
+      git commit -m "Build Vite site"
+      git push
+    fi
+
