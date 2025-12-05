@@ -18,12 +18,10 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'impressum'>('home');
 
-  // Smooth scroll behavior
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth';
   }, []);
 
-  // Reset scroll position when view changes
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentView]);
@@ -31,7 +29,7 @@ const App: React.FC = () => {
   const openModal = () => {
     setIsModalOpen(true);
 
-    // Track conversion
+    // Google Ads conversion
     if (window.gtag) {
       window.gtag('event', 'conversion', {
         send_to: 'AW-17782645036/G0gACPHf0swbEKzCtp9C'
@@ -64,6 +62,7 @@ const App: React.FC = () => {
           {/* Hero Section */}
           <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden border-b border-white/5">
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-400 mb-8">
                 <span className="flex h-1.5 w-1.5 relative">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -148,9 +147,44 @@ const App: React.FC = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          
           <div 
             className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
             onClick={closeModal}
           />
 
-          <div className="relative w-full max-w-2xl bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl o
+          <div className="relative w-full max-w-2xl bg-[#09090b] border border-zinc-800 rounded-xl shadow-2xl overflow-hidden">
+            
+            {/* Modal Header */}
+            <div className="flex justify-between items-center p-4 border-b border-zinc-800 bg-zinc-900/50">
+              <h3 className="text-lg font-medium text-white pl-2">Request Access</h3>
+              <button 
+                onClick={closeModal}
+                className="text-zinc-400 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="bg-zinc-950 relative">
+              <iframe 
+                className="airtable-embed"
+                src="https://airtable.com/embed/appfI6ksS9PIPM7rg/pagIjfzzQiP4YWTwC/form"
+                frameBorder="0"
+                width="100%"
+                height="533"
+                style={{ background: 'transparent' }}
+                title="Request Access Form"
+              />
+            </div>
+
+          </div>
+        </div>
+      )}
+
+    </div>
+  );
+};
+
+export default App;
