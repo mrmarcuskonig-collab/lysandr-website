@@ -14,18 +14,18 @@
       gtag('config', 'AW-17782645036');
     </script>
 
-    <!-- Event snippet for Seitenaufruf conversion page -->
+    <!-- Conversion tracking on button click -->
     <script>
-      gtag('event', 'conversion', {
-        'send_to': 'AW-17782645036/G0gACPHf0swbEKzCtp9C',
-        'value': 1.0,
-        'currency': 'EUR'
-      });
+      function trackEarlyAccessClick() {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17782645036/G0gACPHf0swbEKzCtp9C'
+        });
+      }
     </script>
-
     <script type="module" crossorigin src="./assets/index-DUWAngPw.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-B5sgNVKl.css">
   </head>
+
   <body>
     <div id="root"></div>
   </body>
