@@ -4,9 +4,28 @@
     <!-- Cookiebot MUST be the first script -->
     <script id="Cookiebot"
             src="https://consent.cookiebot.com/uc.js"
-            data-cbid="3c50f6d4-9dab-4b15-94a3-8e40fbd012af"
+            data-cbid="3c50f6d4-9dab-4b15-94a3-8e40fb0d12af"
             data-blockingmode="auto"
             type="text/javascript">
+    </script>
+
+    <!-- Google Consent Mode V2 default settings -->
+    <script data-cookieconsent="ignore">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+
+      gtag("consent", "default", {
+        ad_personalization: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted"
+      });
+
+      gtag("set", "ads_data_redaction", true);
+      gtag("set", "url_passthrough", false);
     </script>
 
     <meta charset="UTF-8" />
@@ -18,11 +37,12 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
+
       gtag('js', new Date());
       gtag('config', 'AW-1778264536');
     </script>
 
-    <!-- Conversion tracking on button click -->
+    <!-- Conversion tracking function -->
     <script>
       function trackEarlyAccessClick() {
         gtag('event', 'conversion', {
